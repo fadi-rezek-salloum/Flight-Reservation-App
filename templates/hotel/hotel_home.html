@@ -1,0 +1,487 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<main class="font-Poppins ">
+    
+    <!--  search -->
+    <div class="shadow-md rounded-lg pt-4 w-3/4 mx-auto -mt-32 bg-white ">
+        <!-- search -->
+
+        <div class="">
+            <div class="px-4 py-2 xl:justify-between gap-2  rounded-md">
+                <form method="get">
+                    <div
+                        class="grid md:grid-cols-6 gap-2 justify-center items-center"
+                        >
+                        <!-- going to  -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Going to</label>
+                            </div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/location-pin.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+        
+                                <select
+                                    id="small"
+                                    name="going_to"
+                                    style="padding-left: 30px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option selected>Going to</option>
+                                    {% for hotel in all_hotels %}
+                                        <option value="{{hotel.going_to}}">{{hotel.going_to}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+        
+                        <!-- check-in -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Check-In</label>
+                            </div>
+                            <div class="relative">
+                                <div
+                                    class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                                >
+                                    <svg
+                                        aria-hidden="true"
+                                        class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </div>
+        
+                                <div class="relative form-floating">
+                                    <input
+                                    required
+                                        name="check_in"
+                                        type="date"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+        
+                        <!-- check-out -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Check-Out</label>
+                            </div>
+                            <div class="relative">
+                                <div
+                                    class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                                >
+                                    <svg
+                                        aria-hidden="true"
+                                        class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <div class="relative form-floating">
+                                    <input
+                                    name="check_out"
+                                    required
+                                        type="date"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+        
+                        <!-- travellers -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Travellers</label>
+                            </div>
+                            <div class="flex items-center col-span-1 w-full">
+                                <img
+                                    src="{% static 'images/user.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+        
+                                <input
+                                required
+                                    type="text"
+                                    name="nop"
+                                    placeholder="1,2,3..."
+                                    style="padding-left: 35px"
+                                    class="pl-10 border w-full rounded-md p-2 bg-gray-50"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- search button -->
+                    <div class="flex justify-center mt-4 w-full">
+                            <button
+                                type="submit"
+                                class="text-primary w-60 h-10 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                            >
+                                search
+                            </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <!-- categories -->
+    <div class=" py-10">
+        <div class="container ">
+
+
+
+
+
+
+
+
+            <h1 class="text-primary text-3xl text-center"> Categories</h1>
+            <div class="text-center my-6">
+                <p>Much destinations here but don't be confuse!</p>
+                <p>It's already grouped by category.</p>
+            </div>
+
+      <!--  gallary -->
+      <div id="carouselExampleCaptions" class="carousel slide relative "  data-bs-ride="carousel">
+        <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4" >
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner relative w-full overflow-hidden" style="height: 550px;">
+          <div class="carousel-item active relative float-left w-full">
+            <div class="relative overflow-hidden bg-no-repeat bg-cover" style="background-position: 50%;">
+              <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(124).jpg" class="block w-full" />
+              <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-black opacity-50"></div>
+            </div>
+            <div class="carousel-caption hidden md:block absolute text-center">
+              <h5 class="text-xl">First slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item relative float-left w-full">
+            <div class="relative overflow-hidden bg-no-repeat bg-cover" style="background-position: 50%;">
+              <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(124).jpg" class="block w-full" />
+              <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-black opacity-50"></div>
+            </div>
+            <div class="carousel-caption hidden md:block absolute text-center">
+              <h5 class="text-xl">Second slide label</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item relative float-left w-full">
+            <div class="relative overflow-hidden bg-no-repeat bg-cover" style="background-position: 50%;">
+              <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(125).jpg" class="block w-full" />
+              <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-black opacity-50"></div>
+            </div>
+            <div class="carousel-caption hidden md:block absolute text-center">
+              <h5 class="text-xl">Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Top Destination -->
+    <div class="container py-10">
+        <h1 class="text-primary text-3xl text-center"> Best Hotels For You</h1>
+        <div class="text-center my-6">
+            <p>Much places suits your mood.</p>
+            <p>Explore somewhere intersting and enjoy the vibes!</p>
+        </div>
+
+        <!-- cards -->
+
+        <!-- group of cards -->
+        <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4     gap-6  mt-8 ">
+
+            {% for hotel in hotels %}
+            <!-- single card -->
+            <div
+                class="max-w-xs xl:max-w-xs   mx-auto shadow-md rounded-lg flex flex-col  bg-white   transition transform  ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-300">
+                <img src="{{hotel.image.url}}" class="h-56 object-cover object-center w-full rounded-t-lg "
+                    alt="">
+                <div class="px-4 py-2">
+                    <div class="flex justify-between">
+                        <h3 class="text-primary text-xl  font-semibold  ">
+                            {{ hotel.going_to }}
+                        </h3>
+
+                    </div>
+                    <div>
+                        <p class="text-h1 text-sm"> Large executive condominium with beautiful beach view. </p>
+                    </div>
+                    <hr class="my-4">
+                    <div class="flex  my-2">
+                        <a href="/hotel/hotels-list/{{hotel.going_to}}/"
+                            class="text-center text-white  w-full bg-primary rounded-md  hover:text-primary hover:bg-white border-2  border-primary">More
+                            info</a>
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+    <!-- footer -->
+
+    <div>
+
+        <div class="grid container md:grid-cols-3 bg-gray-200 text-white gap-5 container py-16">
+            <!-- logo and links -->
+            <div class="flex flex-col gap-4">
+
+                <div class="flex">
+                    <h2 class="  text-span text-2xl font-Semi-bold 600 italic "> Infinity </h2>
+                    <h2 class="  text-primary text-2xl font-Semi-bold 600 italic "> Flight</h2>
+                </div>
+
+                <div>
+                    <div class="  text-left text-xl font-medium  flex flex-col gap-2" id="">
+                        <!-- home page  -->
+                        <a href=""
+                            class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500    ">
+                            Flights</a>
+                        <!-- car-home popular destination for hotel -->
+                        <a href=""
+                            class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500  ">
+                            Stays</a>
+                        <!-- car-home -->
+                        <a href=""
+                            class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500 ">
+                            Car
+                            Rental</a>
+                        <!--contact us  -->
+                        <a href=""
+                            class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500 ">
+                            Contact Us</a>
+
+
+
+                        <a href=""
+                            class="text-primary text-nav  rounded-md  transition duration-500 hover:text-gray-500  ">login
+                        </a>
+                        <a href="" class="text-primary  rounded-md   hover:text-gray-500     transition duration-500">
+                            sign
+                            up</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- about us -->
+            <div class="text-primary text-left">
+                <div class="font-bold  text-xl">About Us
+                </div>
+                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum repellat quaerat
+                    voluptatibus placeat nam, commodi optio pariatur est quia magnam eum harum corrupti dicta, aliquam
+                    sequi voluptate quas.</div>
+            </div>
+
+            <!-- subscribe -->
+
+            <div>
+                <div>
+                    <form action="">
+                        <div class=" flex flex-col justify-start gap-2">
+
+                            <div class="font-bold  text-xl text-primary text-left">
+                                Sign up for our newsletter
+                            </div>
+
+
+                            <div class="flex gap-2"><input type="text" class="
+                                  form-control
+                                  block
+                                  w-full
+                                  px-3
+                                  py-1.5
+                                  text-base
+                                  font-normal
+                                  text-gray-700
+                                  bg-white bg-clip-padding
+                                  border border-solid border-gray-300
+                                  rounded
+                                  transition
+                                  ease-in-out
+                                  m-0
+                                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                " id="exampleFormControlInput1" placeholder="Email address" />
+
+                                <button
+                                    class="  text-sm  px-4  py-1 bg-primary rounded-md  hover:text-primary hover:bg-white border-2  border-primary ">Subscribe</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="text-center p-4 bg-gray-300">
+            © 2021 Copyright:
+            <a class="text-white" href="">Infinity Flight</a>
+        </div>
+
+
+    </div>
+
+
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
+    <script>
+        menu = document.getElementById('menu')
+        links = document.getElementById('links')
+
+        _return = document.getElementById('_return')
+        return_form = document.getElementById('return_form')
+
+
+        _one_way = document.getElementById('_one_way')
+        one_way_form = document.getElementById('one_way_form')
+
+
+
+        _return.addEventListener('click', function (e) {
+            e.preventDefault()
+
+            return_form.classList.remove('hidden', 'flex')
+            one_way_form.classList.remove('hidden', 'flex')
+            one_way_form.classList.add('hidden')
+
+
+
+            return_form.classList.toggle('flex')
+
+
+
+        })
+
+        _one_way.addEventListener('click', function (e) {
+            e.preventDefault()
+
+
+
+            one_way_form.classList.remove('hidden', 'flex')
+            return_form.classList.remove('hidden', 'flex')
+            return_form.classList.add('hidden')
+
+
+
+            one_way_form.classList.toggle('flex')
+
+
+
+        })
+
+
+
+        menu.addEventListener('click', function (e) {
+            e.preventDefault()
+
+
+
+
+            links.classList.toggle('flex')
+            links.classList.toggle('hidden')
+        })
+    </script>
+
+
+</main>
+
+{% endblock content %}

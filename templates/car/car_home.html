@@ -1,0 +1,276 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <main class="font-Poppins">
+        <!-- search -->
+
+        <!-- card for search -->
+        <div class="shadow-md rounded-lg w-3/4 mx-auto -mt-32 bg-white">
+            <form method="get">
+                <div
+                    class="px-4 py-2 xl:justify-between gap-2 shadow-md border-2 border-gray-50 rounded-md"
+                    >
+                    <!-- search input -->
+                    <div
+                        class="grid md:grid-cols-4 gap-2 justify-center items-center"
+                    >
+                        <!-- pick up  -->
+                        <div class="col-span-2">
+                            <div class="mb-2"><label for="">Pick up</label></div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/location-pin.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+
+                                <select
+                                    name="pick_up_location"
+                                    id="small"
+                                    style="padding-left: 40px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option selected>Pick up</option>
+                                    {% for car in all_cars %}
+                                        <option value="{{car.location}}">
+                                            {{car.location}}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- pick up date -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Pick-up date</label>
+                            </div>
+                            <div class="relative">
+                                <div class="relative form-floating">
+                                    <input
+                                        name="pick_up_date"
+                                        type="date"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- drop-of date -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Drop-of date</label>
+                            </div>
+                            <div class="relative">
+                                <div class="relative form-floating">
+                                    <input
+                                        name="drop_off_date"
+                                        type="date"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- pick up time -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Pick-up time</label>
+                            </div>
+                            <div class="relative">
+                                <div class="relative form-floating">
+                                    <input
+                                        name="pick_up_time"
+                                        type="time"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Drop-off time -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Drop-of time</label>
+                            </div>
+                            <div class="relative">
+                                <div class="relative form-floating">
+                                    <input
+                                        name="drop_off_time"
+                                        type="time"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- search button -->
+                    <div class="flex justify-center mt-4 w-full">
+                        <button
+                            type="submit"
+                            class="text-primary w-60 h-10 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                        >
+                            search
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- body -->
+
+        <div class="container">
+            <!-- Popular destinations -->
+
+            <div
+                class="px-8 pb-8 pt-4 shadow-md border-2 border-gray-50 rounded-md my-10"
+            >
+                <h1 class="md:text-2xl font-bold text-primary 2 text-xl">
+                    Popular destinations for car Rental
+                </h1>
+
+                <!-- group of cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+
+                    {% for car in all_cars %}
+
+                    <!-- single card -->
+                    <div
+                        class="max-w-xs xl:max-w-xs mx-auto shadow-md rounded-lg flex flex-col transition transform ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-150"
+                        >
+                        <img
+                            src="{{car.image.url}}"
+                            class="h-56 w-full rounded-t-lg"
+                            alt=""
+                        />
+                        <div class="px-4 py-2">
+                            <div class="flex justify-between">
+                                <h3 class="text-primary text-xl font-semibold">
+                                    {{car.location}}
+                                </h3>
+                            </div>
+                            <div>
+                                <p class="text-h1">
+                                    Car rental in 75 pickup location !
+                                    <span class="text-sm text-gray-600"
+                                        >(${{car.price_per_day}} per day)</span
+                                    >
+                                </p>
+                            </div>
+                            <hr class="my-4" />
+                            <div class="flex my-2 justify-center">
+                                <a
+                                    href="/car/cars-list/{{car.location}}/"
+                                    class="text-primary hover:text-blue-400 hover:underline"
+                                    >Search car rental in {{car.location}}</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <!-- Frequently Asked Questions -->
+            <div class="flex justify-center text-center md:text-left my-10">
+                <div class="shadow-md md:flex">
+                    <div class="bg-primary px-6 rounded-l-md flex items-center">
+                        <p class="text-white text-xl p-4">
+                            Frequently Asked Questions
+                        </p>
+                    </div>
+                    <!-- question -->
+                    <div class="flex flex-col py-4 px-6 border-2 rounded-r-md">
+                        <a
+                            href=""
+                            class="text-primary hover:text-blue-400 hover:underline uppercase"
+                            >What do i need to rent a car?</a
+                        >
+                        <hr class="my-2" />
+
+                        <a
+                            href=""
+                            class="text-primary hover:text-blue-400 hover:underline uppercase"
+                            >Am i old enogh to rent a car?</a
+                        >
+                        <hr class="my-2" />
+
+                        <a
+                            href=""
+                            class="text-primary hover:text-blue-400 hover:underline uppercase"
+                            >Can i book a rental car for someone else?</a
+                        >
+                        <hr class="my-2" />
+
+                        <a
+                            href=""
+                            class="text-primary hover:text-blue-400 hover:underline uppercase"
+                            >Any tips for picking the right car?</a
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- top world -->
+
+            <div
+                class="px-8 pb-8 pt-4 shadow-md border-2 border-gray-50 rounded-md my-10"
+            >
+                <h1 class="md:text-2xl font-bold text-primary 2 text-xl">
+                    Top worldwide location for car rentals
+                </h1>
+
+                <!-- group of cards -->
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-8"
+                >
+                    
+                {% for car in all_cars %}
+                    <!-- single card -->
+                    <div
+                        class="max-w-xs xl:max-w-xs mx-auto shadow-md rounded-lg flex flex-col transition transform ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-150"
+                        >
+                        <img
+                            src="{{car.image.url}}"
+                            class="h-56 object-cover object-center w-full rounded-t-lg"
+                            alt=""
+                        />
+                        <div class="px-4 py-2">
+                            <div class="flex justify-between">
+                                <h3 class="text-primary text-xl font-semibold">
+                                    {{car.location}}
+                                </h3>
+                            </div>
+                            <div>
+                                <p class="text-h1 text-sm">
+                                    car rental form US$ {{car.price_per_day}} per day
+                                </p>
+                            </div>
+                            <hr class="my-4" />
+                            <div class="flex my-2">
+                                <a href="/car/cars-list/{{car.location}}/"
+                                    class="text-white w-full bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                                >
+                                    More info
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    </main>
+
+{% endblock content %}

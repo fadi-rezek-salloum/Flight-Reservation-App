@@ -1,0 +1,164 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container font-Poppins mt-5">
+    <!-- hero images -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-1">
+        <div>
+            <img
+                src="{{hotel.image.url}}"
+                alt=""
+                class="mx-auto xl:mx-0 h-full w-full"
+            />
+        </div>
+        <div
+            class="mx-auto xl:mx-0 grid grid-cols-1 md:grid-cols-2 gap-1 h-full w-full"
+        >
+            <img
+                src="{{hotel.image2.url}}"
+                class="h-full w-full object-cover object-center"
+                alt=""
+            />
+            <img
+                src="{{hotel.image3.url}}"
+                class="h-full w-full object-cover object-center"
+                alt=""
+            />
+
+            <img
+                src="{{hotel.image4.url}}"
+                class="h-full w-full object-cover object-center"
+                alt=""
+            />
+            <img
+                src="{{hotel.image5.url}}"
+                class="h-full w-full object-cover object-center"
+                alt=""
+            />
+        </div>
+    </div>
+
+    <!-- information about hotel  -->
+
+    <div
+        class="px-8 pb-8 pt-4 shadow-md border-2 border-gray-50 rounded-md my-10"
+    >
+        <div class="flex-col">
+            <h1 class="md:text-2xl font-bold text-primary mb-2 text-xl">
+                {{hotel.name}}
+                <span class="text-primary md:text-xl text-sm"
+                    >({{hotel.rating}}/5 Excellent)</span
+                >
+            </h1>
+            <h3 class="font-bold text-primary my-4">
+                Location: {{hotel.going_to}}
+            </h3>
+        </div>
+
+        <hr class="my-4" />
+        <!-- Popular amenities -->
+        <div>
+            <h2 class="md:text-2xl font-bold text-primary mb-2 text-xl">
+                Popular amenities
+            </h2>
+            <div class="flex flex-wrap gap-2 my-4">
+                {% if hotel.ac_tv %}
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Air conditioning
+                </p>
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    TV available
+                </p>
+                {% endif %}
+
+                {% if hotel.pool %}
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Pool
+                </p>
+                {% endif %}
+
+                {% if hotel.breakfast_included %}
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Breakfast Included
+                </p>
+                {% endif %}
+
+                {% if hotel.free_airport_shuttle %}
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Free Airport Shuttle
+                </p>
+                {% endif %}
+
+                {% if hotel.business_services %}
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Business Services
+                </p>
+                {% endif %}
+            </div>
+        </div>
+        <hr class="my-4" />
+        <!-- Cleaning and safety -->
+        <div>
+            <h2 class="md:text-2xl font-bold text-primary mb-2 text-xl">
+                Cleaning and safety practices
+            </h2>
+            <div class="flex flex-wrap gap-4 my-4">
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Cleaned with disinfectant
+                </p>
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Contactless check-in
+                </p>
+
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    48-hour vacancy between guest hotel stayst
+                </p>
+                <p
+                    class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
+                >
+                    Hand sanitiser provided
+                </p>
+            </div>
+            <br>
+            <br>
+            <br>
+            <form action="/hotel/reserve/{{hotel.pk}}/" method="post">
+            {% csrf_token %}
+            <div class="flex my-2">
+                    <input placeholder="Number of days..." type="text" name="nod" class="mx-auto mt-5 pl-8 p-2 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </a>
+            </div>
+            <div class="flex my-2">
+              <button
+                  class="text-white text-center px-5 mx-auto my-5 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+              >
+                  Reserve Room
+              </button>
+          </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

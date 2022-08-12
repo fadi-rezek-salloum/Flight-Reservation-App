@@ -1,0 +1,479 @@
+{% extends '_base.html' %} {% load static %} {% block content %}
+
+<!-- search -->
+
+<div class="container my-4">
+    <div
+        class="px-4 py-2 xl:justify-between gap-2 shadow-md border-2 border-gray-50 rounded-md"
+        >
+        <!-- <i class="fa fa-bars text-primary"  style="font-size:40px;" id="menu"></i> -->
+        <!-- search input -->
+
+        <form method="get">
+            <div
+                class="px-4 py-2 xl:justify-between gap-2 shadow-md border-2 border-gray-50 rounded-md"
+                >
+                <!-- search input -->
+                <div
+                    class="grid md:grid-cols-4 gap-2 justify-center items-center"
+                >
+                    <!-- pick up  -->
+                    <div class="col-span-2">
+                        <div class="mb-2"><label for="">Pick up</label></div>
+                        <div class="flex items-center w-full">
+                            <img
+                                src="{% static 'images/location-pin.png' %}"
+                                class="w-6 h-6 ml-2 absolute"
+                                alt=""
+                            />
+
+                            <select
+                                name="pick_up_location"
+                                id="small"
+                                style="padding-left: 40px"
+                                class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            >
+                                <option selected>Pick up</option>
+                                {% for car in all_cars %}
+                                    <option value="{{car.location}}">
+                                        {{car.location}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- pick up date -->
+                    <div class="col-span-1">
+                        <div class="mb-2">
+                            <label for="">Pick-up date</label>
+                        </div>
+                        <div class="relative">
+                            <div class="relative form-floating">
+                                <input
+                                    name="pick_up_date"
+                                    type="date"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                    placeholder="Select a date"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- drop-of date -->
+                    <div class="col-span-1">
+                        <div class="mb-2">
+                            <label for="">Drop-of date</label>
+                        </div>
+                        <div class="relative">
+                            <div class="relative form-floating">
+                                <input
+                                    name="drop_off_date"
+                                    type="date"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                    placeholder="Select a date"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- pick up time -->
+                    <div class="col-span-1">
+                        <div class="mb-2">
+                            <label for="">Pick-up time</label>
+                        </div>
+                        <div class="relative">
+                            <div class="relative form-floating">
+                                <input
+                                    name="pick_up_time"
+                                    type="time"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                    placeholder="Select a date"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Drop-off time -->
+                    <div class="col-span-1">
+                        <div class="mb-2">
+                            <label for="">Drop-of time</label>
+                        </div>
+                        <div class="relative">
+                            <div class="relative form-floating">
+                                <input
+                                    name="drop_off_time"
+                                    type="time"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                    placeholder="Select a date"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- search button -->
+                <div class="flex justify-center mt-4 w-full">
+                    <button
+                        type="submit"
+                        class="text-primary w-60 h-10 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                    >
+                        search
+                    </button>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- body -->
+<div class="container xl:flex justify-between py-10">
+    <!-- filter -->
+    <div
+        class="mb-10 shadow-md border-2 border-gray-50 rounded-md p-4 h-full flex flex-col"
+        >
+        <p class="text-2xl text-primary font-bold pb-3">Filter by</p>
+        <hr class="my-2" />
+
+        <div class="flex gap-2 flex-wrap xl:flex-col justify-evenly">
+            <!-- Car category -->
+            <div>
+                <p class="text-sm font-medium text-primary">Car category</p>
+
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Small</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Medium</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                        >Large</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Estate</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Premium</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        People carriers</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        SUVs</label
+                    >
+                </div>
+            </div>
+            <!-- Price range -->
+            <div>
+                <p class="text-sm font-medium text-primary">Price range</p>
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Less than $50</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                        >$50 to $100</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                        >$100 to $150</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                        >$150 to $225</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                        >Greater than $225</label
+                    >
+                </div>
+            </div>
+            <!-- Car specs -->
+            <div>
+                <p class="text-sm font-medium text-primary">Car specs</p>
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Air Conditioning</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        4+ doors</label
+                    >
+                </div>
+                <p class="text-lg font-medium text-primary pt-3">
+                    Mileage/Kilometres
+                </p>
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Limited</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Unlimited</label
+                    >
+                </div>
+            </div>
+            <!-- Transmission -->
+            <div>
+                <p class="text-sm font-medium text-primary">Transmission</p>
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Automatic</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                        Manual</label
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- cards -->
+    <div class="flex flex-col space-y-8">
+
+        {% for car in cars %}
+        <!-- single card -->
+        <div
+            class="mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-full md:mx-0 transition transform ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-150"
+          >
+            <div class="md:flex">
+                <img
+                    width="300px"
+                    height="100px"
+                    class="mx-auto object-cover object-center md:min-h-full"
+                    src="{{car.image.url}}"
+                    alt=""
+                />
+
+                <div class="m-4 flex flex-col justify-between gap-4">
+                    <!-- type of car -->
+                    <div class="flex justify-between">
+                        <div class="text-primary text-2xl font-bold">
+                            {{ car.car_name }}
+                        </div>
+                        <div class="text-primary font-Poppins text-lg px-2">
+                            Price for 1 days:
+                            <span class="text-gray-400">
+                              {{ car.price_per_day }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- feature of car -->
+
+                    <div>
+                        <div class="text-primary font-Poppins text-lg">
+                            Feature of Car:
+                        </div>
+                        <div class="flex flex-wrap gap-2 justify-between py-2">
+
+                            {% if car.auto_gear %}
+                            <div
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                Automatic
+                            </div>
+                            {% else %}
+                            <div
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                Manual
+                            </div>
+                            
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                    <!-- reverse button -->
+                    <div class="flex justify-center">
+                        <a href="/car/detail/{{car.id}}/"
+                            class="text-white w-full bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                        >
+                            Car Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}

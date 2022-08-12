@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div>
+    <div class="flex flex-col gap-4 container py-8 items-center">
+        <div>
+            <h1 class="md:text-2xl font-bold text-primary 2 text-2xl">
+                Search results
+            </h1>
+        </div>
+
+        <div>
+            <p class="text-primary text-2xl text-center">
+                There are currently no flights matching your search. Please try
+                different travel dates or itinerary. You can also discover our
+                destinations and offers.
+            </p>
+        </div>
+        <!-- reverse button -->
+        <div class="flex justify-center">
+            <a href="/"
+                class="text-white w-full bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary px-4 py-1"
+            >
+                Change Search
+            </a>
+        </div>
+    </div>
+
+    <img
+        src="{% static 'images/not_found.jpg' %}"
+        width="400px"
+        height="400px"
+        class="mx-auto"
+        alt=""
+    />
+</div>
+
+{% endblock content %}

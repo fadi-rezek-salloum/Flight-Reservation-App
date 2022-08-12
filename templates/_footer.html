@@ -1,0 +1,113 @@
+<!-- footer -->
+
+<div>
+
+    <div class="grid container md:grid-cols-3 bg-gray-200 text-white gap-5 container py-16">
+        <!-- logo and links -->
+        <div class="flex flex-col gap-4">
+
+            <a href="/" class="flex">
+                <h2 class="  text-span text-2xl font-Semi-bold 600 italic "> Infinity </h2>
+                <h2 class="  text-primary text-2xl font-Semi-bold 600 italic "> Flight</h2>
+            </a>
+
+            <div>
+                <div class="  text-left text-xl font-medium  flex flex-col gap-2" id="">
+                    <!-- home page  -->
+                    <a href="/"
+                        class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500    ">
+                        Flights</a>
+                    <!-- car-home popular destination for hotel -->
+                    <a href="/hotel/"
+                        class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500  ">
+                        Stays</a>
+                    <!-- car-home -->
+                    <a href="/car/"
+                        class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500 ">
+                        Car
+                        Rental</a>
+                    <!--contact us  -->
+                    <a href="/contact-us/"
+                        class="text-nav text-primary  border-white hover:border-primary  transition duration-500  hover:text-gray-500 ">
+                        Contact Us</a>
+
+
+                    {% if request.user.is_authenticated %}
+                    <span class="bg-primary text-white px-4 rounded-xl">Welcome, {{ request.user.username }} </span>
+                    <a href="/account/logout/" class="text-primary  rounded-md   hover:text-gray-500     transition duration-500">
+                        Logout</a>
+
+                    {% else %}
+
+                    <a href="/account/login"
+                        class="text-primary text-nav  rounded-md  transition duration-500 hover:text-gray-500  ">login
+                    </a>
+                    <a href="/account/register/" class="text-primary  rounded-md   hover:text-gray-500     transition duration-500">
+                        Register</a>
+                    
+                    {% endif %}
+                    
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- about us -->
+        <div class="text-primary text-left">
+            <div class="font-bold  text-xl">About Us
+            </div>
+            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum repellat quaerat
+                voluptatibus placeat nam, commodi optio pariatur est quia magnam eum harum corrupti dicta, aliquam
+                sequi voluptate quas.</div>
+        </div>
+
+        <!-- subscribe -->
+
+        <div>
+            <div>
+                <form action="">
+                    <div class=" flex flex-col justify-start gap-2">
+
+                        <div class="font-bold  text-xl text-primary text-left">
+                            Sign up for our newsletter
+                        </div>
+
+
+                        <div class="flex gap-2"><input type="text" class="
+                              form-control
+                              block
+                              w-full
+                              px-3
+                              py-1.5
+                              text-base
+                              font-normal
+                              text-gray-700
+                              bg-white bg-clip-padding
+                              border border-solid border-gray-300
+                              rounded
+                              transition
+                              ease-in-out
+                              m-0
+                              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                            " id="exampleFormControlInput1" placeholder="Email address" />
+
+                            <button
+                                class="  text-sm  px-4  py-1 bg-primary rounded-md  hover:text-primary hover:bg-white border-2  border-primary ">Subscribe</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="text-center p-4 bg-gray-300">
+        © 2022 Copyright:
+        <a class="text-white" href="">Infinity Flight</a>
+    </div>
+
+
+</div>

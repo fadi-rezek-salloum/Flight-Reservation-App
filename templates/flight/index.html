@@ -1,0 +1,432 @@
+{% extends '_base.html' %} {% load static %} {% block content %}
+
+<main class="font-Poppins">
+    <!-- card for search -->
+    <div class="shadow-md rounded-lg w-3/4 mx-auto -mt-32 bg-white">
+        <!-- search -->
+
+        <div
+            class="px-4 py-2 xl:justify-between gap-2 shadow-md border-2 border-gray-50 rounded-md"
+            >
+            <!-- <i class="fa fa-bars text-primary"  style="font-size:40px;" id="menu"></i> -->
+            <!-- search input -->
+            <div class="flex justify-around py-4">
+                <button
+                    id="_return"
+                    class="text-nav text-primary border-b-4 border-white hover:border-primary transition duration-500 hover:text-primary"
+                >
+                    Return
+                </button>
+                <button
+                    id="_one_way"
+                    class="text-nav text-primary border-b-4 border-white hover:border-primary transition duration-500 hover:text-primary"
+                >
+                    One-way
+                </button>
+            </div>
+
+            <!-- return_search_input -->
+
+            <div id="return_form" class="flex">
+                <form method="get">
+                    <div
+                        class="grid md:grid-cols-6 gap-2 justify-center items-center box-border"
+                    >
+                        <!-- Leaving from -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Leaving from</label>
+                            </div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/location-pin.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+
+                                <select
+                                    required
+                                    id="small"
+                                    name="from"
+                                    style="padding-left: 40px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option selected>Leaving from</option>
+                                    {% for flight in flights %}
+                                    <option value="{{flight.from_location}}">
+                                        {{flight.from_location}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Going to -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Going to</label>
+                            </div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/location-pin.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+
+                                <select
+                                required
+                                    id="small"
+                                    name="to"
+                                    style="padding-left: 40px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option selected>Going to</option>
+                                    {% for flight in flights %}
+                                    <option value="{{flight.to_location}}">
+                                        {{flight.to_location}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Departing -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Departing</label>
+                            </div>
+                            <div class="relative">
+                                <div class="relative form-floating">
+                                    <input
+                                    required
+                                        type="date"
+                                        name="departing"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Returning -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Returning</label>
+                            </div>
+                            <div class="relative">
+                                <div class="relative form-floating">
+                                    <input
+                                    required
+                                        type="date"
+                                        name="returning"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Traveler -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Traveler</label>
+                            </div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/persons.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+
+                                <input
+                                required
+                                    id="small"
+                                    name="nop"
+                                    placeholder="1 or 2 ... etc"
+                                    style="padding-left: 40px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- search button -->
+                    <div class="flex justify-center mt-4 w-full">
+                        <button
+                            type="submit"
+                            class="text-primary w-60 h-10 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                        >
+                            search
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="one_way_form" class="hidden">
+                <form method="get">
+                    <div
+                        class="grid md:grid-cols-6 gap-2 justify-center items-center box-border"
+                    >
+                        <!-- Leaving from -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Leaving from</label>
+                            </div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/location-pin.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+
+                                <select
+                                    required
+                                    id="small"
+                                    name="from"
+                                    style="padding-left: 40px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option selected>Leaving from</option>
+                                    {% for flight in flights %}
+                                    <option value="{{flight.from_location}}">
+                                        {{flight.from_location}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Going to -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Going to</label>
+                            </div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/location-pin.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+
+                                <select
+                                required
+                                    id="small"
+                                    name="to"
+                                    style="padding-left: 40px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option selected>Going to</option>
+                                    {% for flight in flights %}
+                                    <option value="{{flight.to_location}}">
+                                        {{flight.to_location}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Departing -->
+                        <div class="col-span-1">
+                            <div class="mb-2">
+                                <label for="">Departing</label>
+                            </div>
+                            <div class="relative">
+                                <div class="relative form-floating">
+                                    <input
+                                    required
+                                        type="date"
+                                        name="departing"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                        placeholder="Select a date"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Traveler -->
+                        <div class="col-span-2">
+                            <div class="mb-2">
+                                <label for="">Traveler</label>
+                            </div>
+                            <div class="flex items-center w-full">
+                                <img
+                                    src="{% static 'images/persons.png' %}"
+                                    class="w-6 h-6 ml-2 absolute"
+                                    alt=""
+                                />
+
+                                <input
+                                required
+                                    id="small"
+                                    name="nop"
+                                    placeholder="1 or 2 ... etc"
+                                    style="padding-left: 40px"
+                                    class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- search button -->
+                    <div class="flex justify-center mt-4 w-full">
+                        <button
+                            type="submit"
+                            class="text-primary w-60 h-10 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                        >
+                            search
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <hr class="my-4" />
+        </div>
+    </div>
+
+    <!-- popular search -->
+    <div class="my-20 container">
+        <h1 class="text-primary text-3xl text-center">Popular Search</h1>
+        <div
+            class="flex flex-wrap gap-8 justify-center xl:justify-between my-6"
+        >
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+            <div
+                class="text-primary rounded-full border-2 border-primary px-10 py-1 hover:bg-primary hover:text-white transition duration-150"
+            >
+                Lotus Temple
+            </div>
+        </div>
+    </div>
+
+    <!-- flights -->
+    <div class="bg-gray-100 py-10">
+        <div class="container">
+            <h1 class="text-primary text-3xl text-center">Top Flights</h1>
+            <div class="text-center my-6">
+                <p>Much destinations here but don't be confuse!</p>
+                <p>It's already grouped by category.</p>
+            </div>
+
+            <!-- cards -->
+
+            <!-- group of cards -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-8"
+            >
+                {% for flight in flights %}
+                <!-- single card -->
+                <div
+                    class="max-w-xs xl:max-w-xs mx-auto shadow-md rounded-lg flex flex-col bg-white transition transform ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+                >
+                    <img
+                        src="{% static 'images/Rectangle 9.png' %}"
+                        class="h-56 object-cover object-center w-full rounded-t-lg"
+                        alt=""
+                    />
+                    <div class="px-4 py-2">
+                        <div class="flex justify-between">
+                            <h3 class="text-primary text-xl font-semibold">
+                                {{flight.to_location}}
+                            </h3>
+                        </div>
+                        <hr class="my-4" />
+                        <div class="flex my-2">
+                            <a
+                                href="/flight/{{flight.to_location}}"
+                                class="text-white text-center w-full bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                            >
+                                Details</a
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
+<script>
+    menu = document.getElementById("menu");
+    links = document.getElementById("links");
+
+    _return = document.getElementById("_return");
+    return_form = document.getElementById("return_form");
+
+    _one_way = document.getElementById("_one_way");
+    one_way_form = document.getElementById("one_way_form");
+
+    _return.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        return_form.classList.remove("hidden", "flex");
+        one_way_form.classList.remove("hidden", "flex");
+        one_way_form.classList.add("hidden");
+
+        return_form.classList.toggle("flex");
+    });
+
+    _one_way.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        one_way_form.classList.remove("hidden", "flex");
+        return_form.classList.remove("hidden", "flex");
+        return_form.classList.add("hidden");
+
+        one_way_form.classList.toggle("flex");
+    });
+
+    menu.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        links.classList.toggle("flex");
+        links.classList.toggle("hidden");
+    });
+</script>
+
+{% endblock content %}

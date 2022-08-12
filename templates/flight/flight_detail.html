@@ -1,0 +1,160 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<main class="font-Poppins">
+
+
+    <div class="container xl:flex justify-between py-10 gap-4">
+        <!-- cards -->
+        <div class="flex py-4 xl:w-3/4 flex-col shadow-md rounded-md px-8">
+            <h1 class="md:text-2xl font-bold text-primary mb-2 text-xl">
+                Your Trip Summary
+            </h1>
+            <div class="w-full flex flex-col gap-4 py-8">
+                <!-- to barcalona -->
+                <div class="shadow-md rounded-md px-4 py-4 w-full">
+                    <div class="w-full">
+                        <h2
+                            class="md:text-lg text-lg font-bold text-primary mb-2"
+                        >
+                            {{flight.from_location}} To {{ flight.to_location }}
+                        </h2>
+
+                        <span class="text-primary text-sm px-2"
+                            >{{flight.date}}</span
+                        >
+                    </div>
+                    <div class="flex">
+                        <div class="w-full">
+                            <div class="px-6 flex flex-col py-3">
+                                <p class="text-sm text-primary font-bold">
+                                    Departure
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.date}} - {{ flight.time }}
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.from_location}} Airport
+                                </p>
+                            </div>
+                            <div class="px-6 flex flex-col py-3">
+                                <p class="text-sm text-primary font-bold">
+                                    Arrival
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.arrive_date}} - {{ flight.arrive_time }}
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.to_location}} Airport
+                                </p>
+                            </div>
+
+                            <div
+                                class="text-sm flex flex-col text-primary text-center bg-white"
+                            >
+                                <hr class="-mb-2" />
+                                <div class="bg-white px-2 w-max mx-auto">
+                                    Total duration : {{flight.date|timesince:flight.arrive_date}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% if flight.returning_date %}
+            <div class="w-full flex flex-col gap-4 py-8">
+                <!-- to barcalona -->
+                <div class="shadow-md rounded-md px-4 py-4 w-full">
+                    <div class="w-full">
+                        <h2
+                            class="md:text-lg text-lg font-bold text-primary mb-2"
+                        >
+                            {{flight.to_location}} To {{ flight.from_location }}
+                        </h2>
+
+                        <span class="text-primary text-sm px-2"
+                            >{{flight.returning_date}}</span
+                        >
+                    </div>
+                    <div class="flex">
+                        <div class="w-full">
+                            <div class="px-6 flex flex-col py-3">
+                                <p class="text-sm text-primary font-bold">
+                                    Departure
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.returning_date}} - {{ flight.returning_time }}
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.to_location}} Airport
+                                </p>
+                            </div>
+                            <div class="px-6 flex flex-col py-3">
+                                <p class="text-sm text-primary font-bold">
+                                    Arrival
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.returning_arrive_date}} - {{ flight.returning_arrive_time }}
+                                </p>
+                                <p class="text-sm text-primary">
+                                    {{flight.from_location}} Airport
+                                </p>
+                            </div>
+
+                            <div
+                                class="text-sm flex flex-col text-primary text-center bg-white"
+                            >
+                                <hr class="-mb-2" />
+                                <div class="bg-white px-2 w-max mx-auto">
+                                    Total duration : {{flight.date|timesince:flight.arrive_date}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        
+
+        <!-- summary trip -->
+        <div
+            class="mb-10 mt-4 xl:mt-0 py-2 xl:w-1/4 shadow-md border-2 border-gray-50 rounded-md px-2 h-full flex flex-col"
+            >
+            <div class="justify-center">
+                <h1 class="md:text-2xl font-bold text-primary mb-2 text-xl">
+                    Price details
+                </h1>
+
+                <div class="flex justify-between">
+                    <div class="text-x">Car hire fee * 1 day</div>
+                </div>
+                <div class="flex justify-between">
+                    <div class="text-x">Hotel hire fee * 4 day</div>
+                </div>
+                <div class="flex justify-between">
+                    <div class="text-x">Round trip ticket</div>
+                </div>
+                <hr class="my-4" />
+                <div class="flex font-bold justify-between">
+                    <div class="text-xl">Total Price</div>
+                    <div class="text-green-500 text-xl">{{flight.price}} $</div>
+                </div>
+                <div class="flex my-4">
+                    <a href="/flight/{{flight.pk}}/reserve/"
+                        class="text-white text-center w-full bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                    >
+                        Continue
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</main>
+
+{% endblock content %}

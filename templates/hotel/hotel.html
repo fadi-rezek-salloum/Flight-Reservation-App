@@ -1,0 +1,469 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!--  search -->
+<div class="shadow-md rounded-lg pt-4 w-3/4 mx-auto bg-white">
+    <!-- search -->
+
+    <div class="">
+        <div class="px-4 py-2 xl:justify-between gap-2 rounded-md">
+            <!-- <i class="fa fa-bars text-primary"  style="font-size:40px;" id="menu"></i> -->
+            <!-- search input -->
+            <form method="get">
+            <div
+                class="grid md:grid-cols-6 gap-2 justify-center items-center"
+                >
+                <!-- going to  -->
+                <div class="col-span-2">
+                    <div class="mb-2">
+                        <label for="">Going to</label>
+                    </div>
+                    <div class="flex items-center w-full">
+                        <img
+                            src="{% static 'images/location-pin.png' %}"
+                            class="w-6 h-6 ml-2 absolute"
+                            alt=""
+                        />
+
+                        <select
+                            id="small"
+                            name="going_to"
+                            style="padding-left: 30px"
+                            class="pl-8 p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        >
+                            <option selected>Going to</option>
+                            {% for hotel in all_hotels %}
+                                <option value="{{hotel.going_to}}">{{hotel.going_to}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- check-in -->
+                <div class="col-span-1">
+                    <div class="mb-2">
+                        <label for="">Check-In</label>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                        >
+                            <svg
+                                aria-hidden="true"
+                                class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                    clip-rule="evenodd"
+                                ></path>
+                            </svg>
+                        </div>
+
+                        <div class="datepicker relative form-floating">
+                            <input
+                            required
+                                name="check_in"
+                                type="date"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                placeholder="Select a date"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- check-out -->
+                <div class="col-span-1">
+                    <div class="mb-2">
+                        <label for="">Check-Out</label>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                        >
+                            <svg
+                                aria-hidden="true"
+                                class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                    clip-rule="evenodd"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div class="datepicker relative form-floating">
+                            <input
+                            name="check_out"
+                            required
+                                type="date"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                placeholder="Select a date"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- travellers -->
+                <div class="col-span-2">
+                    <div class="mb-2">
+                        <label for="">Travellers</label>
+                    </div>
+                    <div class="flex items-center col-span-1 w-full">
+                        <img
+                            src="{% static 'images/user.png' %}"
+                            class="w-6 h-6 ml-2 absolute"
+                            alt=""
+                        />
+
+                        <input
+                        required
+                            type="text"
+                            name="nop"
+                            placeholder="1,2,3..."
+                            style="padding-left: 35px"
+                            class="pl-10 border w-full rounded-md p-2 bg-gray-50"
+                        />
+                    </div>
+                </div>
+            </div>
+            <!-- search button -->
+            <div class="flex justify-center mt-4 w-full">
+                    <button
+                        type="submit"
+                        class="text-primary w-60 h-10 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                    >
+                        search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- body -->
+<div class="container xl:flex justify-between py-10">
+    <!-- filters -->
+    <div
+        class="mb-10 shadow-md border-2 border-gray-50 rounded-md p-4 h-full flex flex-col"
+    >
+        <p class="text-2xl text-primary font-bold pb-3">Filter by</p>
+        <hr class="my-2" />
+        <div class="flex gap-2 flex-wrap xl:flex-col justify-between">
+            <!-- popular filters -->
+            <div>
+                <p class="text-sm font-medium text-primary">
+                    Popular filters
+                </p>
+
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >Pool</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >Breakfast included</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >Free airport shuttle</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >Business services</label
+                    >
+                </div>
+            </div>
+            <!-- your budget -->
+            <div>
+                <p class="text-sm font-medium text-primary">
+                    Your budget
+                </p>
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                    >
+                        Less than $50</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >$50 to $100</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >$100 to $150</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >$150 to $225</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >Greater than $225</label
+                    >
+                </div>
+            </div>
+            <!-- guest rating -->
+            <div>
+                <p class="text-sm font-medium text-primary">
+                    Guest rating
+                </p>
+                <div class="flex items-center mb-2 mt-4">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                    >
+                        Any</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >Wonderful 4.5+</label
+                    >
+                </div>
+                <div class="flex items-center mb-2 mt-2">
+                    <input
+                        id="default-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="default-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                        >Very good 4+</label
+                    >
+                </div>
+                <div class="flex items-center">
+                    <input
+                        id="checked-checkbox"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                        for="checked-checkbox"
+                        class="ml-2 text-sm text-primary dark:text-gray-300"
+                    >
+                        Good 3.5+</label
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- cards -->
+    <div class="flex flex-col space-y-8">
+
+      {% for hotel in hotels %}
+        <!-- single card -->
+        <div
+            class="mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-full md:mx-0 transition transform ease-in-out delay-100 hover:-translate-y-1 hover:scale-105 duration-150"
+          >
+            <div class="md:flex">
+                <img
+                    width="250px"
+                    height="100px"
+                    class="mx-auto object-cover object-center md:min-h-full md:w-1/3"
+                    src="{{hotel.image.url}}"
+                    alt=""
+                />
+
+                <div class="m-4 flex flex-col justify-between gap-2">
+                    <p class="text-primary text-2xl font-bold">
+                        {{hotel.name}}
+                    </p>
+                    <div>
+                        <div class="flex">
+                            <div
+                                class="text-primary font-Poppins text-lg"
+                            >
+                                City:
+                            </div>
+                            <p>{{hotel.going_to}}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex">
+                            <div
+                                class="text-primary font-Poppins text-lg"
+                            >
+                                Rating:
+                            </div>
+                            <p>{{hotel.rating}}/5 Good</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-primary font-Poppins text-lg">
+                            Feature of Rooms:
+                        </div>
+
+                        <div
+                            class="flex flex-wrap gap-1 justify-between py-2"
+                            >
+                            {% if hotel.ac_tv %}
+                            <div
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                Air conditioning
+                            </div>
+                            <div
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                TV available
+                            </div>
+                            {% endif %}
+            
+                            {% if hotel.pool %}
+                            <p
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                Pool
+                            </p>
+                            {% endif %}
+            
+                            {% if hotel.breakfast_included %}
+                            <p
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                Breakfast Included
+                            </p>
+                            {% endif %}
+            
+                            {% if hotel.free_airport_shuttle %}
+                            <p
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                Free Airport Shuttle
+                            </p>
+                            {% endif %}
+            
+                            {% if hotel.business_services %}
+                            <p
+                                class="text-sm px-3 py-1 font-Poppins bg-primary text-white rounded-full"
+                            >
+                                Business Services
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- reverse button -->
+                    <div class="flex justify-center">
+                        <a href="/hotel/detail/{{hotel.pk}}/"
+                            class="text-white text-center w-full bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                        >
+                            Hotel Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+    <h1 class="text-3xl px-5 py-1 font-Poppins bg-primary text-white rounded-full">No Results Found !</h1>
+      {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}        
