@@ -318,15 +318,13 @@
     {% for flight in flights %}
 
     <!--single card  -->
-    <div class="flex flex-wrap  gap-4 text-center md:flex md:justify-between items-center justify-center border-2 border-gray-100 rounded-md shadow-xl p-4  ">
+    <div class="flex flex-wrap gap-4 text-center md:flex md:justify-between items-center justify-center border-2 border-gray-100 rounded-md shadow-xl p-4  ">
       <!-- left side -->
 
-      <div class="md:text-left flex flex-col gap-2">
+      <div class="md:text-left flex flex-col gap-1">
         <p class="text-primary text-2xl  font-medium ">{{flight.time}} {{flight.from_location}}</p>
         <p class="text-primary text-xl ">{{flight.from_location}}</p>
-        <p class="text-primary text-sm">{{flight.id}}</p>
         <p class="text-primary text-sm">Operated by: {{flight.from_location}} Airways</p>
-        <a class=" text-blue-500 hover:text-blue-800 text-sm" href="{{flight.get_absolute_url}}">Flight details</a>
       </div>
 
       <div class="flex flex-col items-center text-center gap-1 md:w-16">
@@ -343,31 +341,24 @@
       <div class=" text-center md:text-right flex flex-col gap-2  ">
         <p class="text-primary text-2xl  font-medium ">{{flight.arrive_time}} {{flight.to_location}}</p>
         <p class="text-primary text-xl ">{{flight.to_location}}</p>
-        <p class="text-primary text-sm">{{flight.to_location}}</p>
         <p class="text-primary text-sm">Operated by: {{flight.to_location}} Airways</p>
-        <a class=" text-blue-500 hover:text-blue-800 text-sm" href="{{flight.get_absolute_url}}">Flight details</a>
       </div>
 
-
-
-
-
+      {% if 'First' in flight.category.name %}
       <div class=" flex flex-col items-center border-2 border-gray-100 rounded-md  p-4 gap-2 shadow-md">
-        <p class="text-primary text-md">Economy from</p>
-        <p class="text-xl text-h1 border-2 rounded-md   py-2 px-4 border-primary">${{flight.price}}</p>
-        <a class="text-primary text-sm   text-blue-500 hover:text-blue-800" href=""> Total price for all passengers</a>
-        <button
-          class=" text-white  w-60 h-10 bg-primary rounded-md  hover:text-primary hover:bg-white border-2  border-primary">Select
-          Fare</button>
+        <p class="text-primary text-md">First Class</p>
+        <p class="text-xl text-h1 border-2 rounded-md   py-2 px-4 border-primary">${{flight.category.price}}</p>
+        <a href="{{flight.get_absolute_url}}"
+          class=" text-white  w-60 text-center py-2 bg-primary rounded-md  hover:text-primary hover:bg-white border-2  border-primary">View Details</a>
       </div>
+      {% else %}
       <div class=" flex flex-col items-center border-2 border-gray-100 rounded-md  p-4 gap-2 shadow-md">
-        <p class="text-primary text-md">Economy from</p>
-        <p class="text-xl text-h1 border-2 rounded-md   py-2 px-4 border-primary">${{flight.price}}</p>
-        <a class="text-primary text-sm   text-blue-500 hover:text-blue-800" href=""> Total price for all passengers</a>
-        <button
-          class=" text-white  w-60 h-10 bg-primary rounded-md  hover:text-primary hover:bg-white border-2  border-primary">Select
-          Fare</button>
+        <p class="text-primary text-md">Economy Class</p>
+        <p class="text-xl text-h1 border-2 rounded-md   py-2 px-4 border-primary">${{flight.category.price}}</p>
+        <a href="{{flight.get_absolute_url}}"
+          class=" text-white  w-60 h-10 bg-primary rounded-md  hover:text-primary hover:bg-white border-2  border-primary">View Details</a>
       </div>
+      {% endif %}
 
 
 

@@ -4,7 +4,20 @@ from django.contrib.auth.decorators import login_required
 from .models import Car, CarReservation
 
 def carsHome(request):
-    all_cars = Car.objects.all()
+    all_cars_temp = Car.objects.all()
+    cars_temp = Car.objects.all()[:4]
+
+    cars = {}
+    all_cars = {}
+
+    for f in cars_temp:
+        cars[f.location] = f
+
+    for f in all_cars_temp:
+        all_cars[f.location] = f
+
+    cars = cars.values()
+    all_cars = all_cars.values()
 
     if request.GET.get('pick_up_date'):
         pick_up_location = request.GET.get('pick_up_location')
@@ -15,7 +28,7 @@ def carsHome(request):
         
         return redirect(f'/car/cars-list/?pick_up_location={pick_up_location}&pick_up_date={pick_up_date}&drop_off_date={drop_off_date}&pick_up_time={pick_up_time}&drop_off_time={drop_off_time}')
 
-    return render(request, 'car/car_home.html', context={'all_cars': all_cars})
+    return render(request, 'car/car_home.html', context={'all_cars': all_cars, 'cars': cars})
 
 def carsList(request, location=None):
 

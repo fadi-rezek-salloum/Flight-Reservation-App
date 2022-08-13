@@ -7,7 +7,20 @@ from django.contrib.auth.decorators import login_required
 from .models import Flight, FlightReservation
 
 def index(request):
-    flights = Flight.objects.all()[:8]
+    flights_temp = Flight.objects.all()[:4]
+    all_flights_temp = Flight.objects.all()
+
+    flights = {}
+    all_flights = {}
+
+    for f in flights_temp:
+        flights[f.to_location] = f
+
+    for f in all_flights_temp:
+        all_flights[f.to_location] = f
+
+    flights = flights.values()
+    all_flights = all_flights.values()
 
     if request.method == 'GET' and request.GET.get('from') is not None:
         from_loc = request.GET.get('from')
@@ -20,6 +33,7 @@ def index(request):
 
     return render(request, 'flight/index.html', context={
         'flights': flights,
+        'all_flights': all_flights,
     })
 
 def flightDestination(request, destination):
@@ -27,6 +41,7 @@ def flightDestination(request, destination):
     from_loc = None
 
     all_flights = Flight.objects.all()
+    flights = None
 
     if request.GET.get('from'):
         from_loc = request.GET.get('from')
@@ -42,13 +57,13 @@ def flightDestination(request, destination):
             flights = Flight.objects.filter(from_location__icontains=from_loc, to_location__icontains=to, date__lte=departing, returning_date__gte=returning, max_passengers__gte=nop)
         else:
             flights = Flight.objects.filter(from_location__icontains=from_loc, to_location__icontains=to, date__lte=departing, max_passengers__gte=nop)
-
-        if not flights.exists():
-            return redirect('/flight/not-found/')
     
     else:
         flights = Flight.objects.filter(to_location__icontains=destination)
         to = destination
+
+    if not flights.exists():
+            return redirect('/flight/not-found/')
 
     return render(request, 'flight/flight_list.html', context={'flights': flights, 'all_flights': all_flights, 'from_loc': from_loc, 'to': to})
 

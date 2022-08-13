@@ -129,19 +129,24 @@
                     Price details
                 </h1>
 
-                <div class="flex justify-between">
-                    <div class="text-x">Car hire fee * 1 day</div>
-                </div>
-                <div class="flex justify-between">
-                    <div class="text-x">Hotel hire fee * 4 day</div>
-                </div>
+                {% if flight.returning_date %}
                 <div class="flex justify-between">
                     <div class="text-x">Round trip ticket</div>
+                    <div class="text-green-500 text-xl">$ {{flight.category.price}}</div>
+                </div>
+                {% endif %}
+                <div class="flex justify-between">
+                    <div class="text-x">One-way trip ticket</div>
+                    <div class="text-green-500 text-xl">$ {{ flight.category.price }}</div>
                 </div>
                 <hr class="my-4" />
                 <div class="flex font-bold justify-between">
                     <div class="text-xl">Total Price</div>
-                    <div class="text-green-500 text-xl">{{flight.price}} $</div>
+                    {% if flight.returning_date %}
+                    <div class="text-green-500 text-xl">$ {% widthratio flight.category.price 1 2 %}</div>
+                    {% else %}
+                    <div class="text-green-500 text-xl">$ {% widthratio flight.category.price 1 1 %}</div>
+                    {% endif %}
                 </div>
                 <div class="flex my-4">
                     <a href="/flight/{{flight.pk}}/reserve/"

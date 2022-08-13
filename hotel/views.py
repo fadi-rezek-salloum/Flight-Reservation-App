@@ -5,7 +5,20 @@ from .models import Hotel, HotelReservation
 
 def hotelsHome(request):
 
-    all_hotels = Hotel.objects.all()
+    all_hotels_temp = Hotel.objects.all()
+    hotels_temp = Hotel.objects.all()[:4]
+
+    hotels = {}
+    all_hotels = {}
+
+    for f in hotels_temp:
+        hotels[f.going_to] = f
+
+    for f in all_hotels_temp:
+        all_hotels[f.going_to] = f
+
+    hotels = hotels.values()
+    all_hotels = all_hotels.values()
 
     if request.GET.get('check_in'):
         going_to = request.GET.get('going_to')
@@ -15,7 +28,7 @@ def hotelsHome(request):
 
         return redirect(f'/hotel/hotels-list/?going_to={going_to}&check_in={check_in}&check_out={check_out}&nop={nop}')
 
-    return render(request, 'hotel/hotel_home.html', context={'all_hotels': all_hotels})
+    return render(request, 'hotel/hotel_home.html', context={'all_hotels': all_hotels, 'hotels': hotels})
 
 def hotelsList(request, destination=None):
     all_hotels = Hotel.objects.all()
