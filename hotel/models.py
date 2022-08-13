@@ -34,15 +34,8 @@ class HotelReservation(models.Model):
 
     from_date = models.DateTimeField(auto_now_add=True)
 
-    number_of_days = models.PositiveIntegerField(default=1)
-
-    total = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)
 
     def __str__(self):
         return self.user.username + ' -> ' + str(self.hotel.id)
-
-    def save(self, *args, **kwargs):
-        self.total = Decimal(self.number_of_days) * self.hotel.price_per_24_h
-
-        return super().save(*args, **kwargs)
     

@@ -39,6 +39,7 @@ def index(request):
 def flightDestination(request, destination):
     to = None
     from_loc = None
+    returning = None
 
     all_flights = Flight.objects.all()
     flights = None
@@ -65,7 +66,7 @@ def flightDestination(request, destination):
     if not flights.exists():
             return redirect('/flight/not-found/')
 
-    return render(request, 'flight/flight_list.html', context={'flights': flights, 'all_flights': all_flights, 'from_loc': from_loc, 'to': to})
+    return render(request, 'flight/flight_list.html', context={'flights': flights, 'all_flights': all_flights, 'from_loc': from_loc, 'to': to, 'returning': returning})
 
 
 def contact(request):

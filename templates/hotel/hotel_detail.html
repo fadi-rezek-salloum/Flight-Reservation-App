@@ -1,8 +1,4 @@
-{% extends '_base.html' %}
-
-{% load static %}
-
-{% block content %}
+{% extends '_base.html' %} {% load static %} {% block content %}
 
 <div class="container font-Poppins mt-5">
     <!-- hero images -->
@@ -45,7 +41,7 @@
 
     <div
         class="px-8 pb-8 pt-4 shadow-md border-2 border-gray-50 rounded-md my-10"
-    >
+        >
         <div class="flex-col">
             <h1 class="md:text-2xl font-bold text-primary mb-2 text-xl">
                 {{hotel.name}}
@@ -76,33 +72,25 @@
                 >
                     TV available
                 </p>
-                {% endif %}
-
-                {% if hotel.pool %}
+                {% endif %} {% if hotel.pool %}
                 <p
                     class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
                 >
                     Pool
                 </p>
-                {% endif %}
-
-                {% if hotel.breakfast_included %}
+                {% endif %} {% if hotel.breakfast_included %}
                 <p
                     class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
                 >
                     Breakfast Included
                 </p>
-                {% endif %}
-
-                {% if hotel.free_airport_shuttle %}
+                {% endif %} {% if hotel.free_airport_shuttle %}
                 <p
                     class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
                 >
                     Free Airport Shuttle
                 </p>
-                {% endif %}
-
-                {% if hotel.business_services %}
+                {% endif %} {% if hotel.business_services %}
                 <p
                     class="text-sm max-w-sm text-white text-center px-3 py-1 font-Poppins bg-primary rounded-full"
                 >
@@ -140,25 +128,75 @@
                     Hand sanitiser provided
                 </p>
             </div>
-            <br>
-            <br>
-            <br>
-            <form action="/hotel/reserve/{{hotel.pk}}/" method="post">
-            {% csrf_token %}
-            <div class="flex my-2">
-                    <input placeholder="Number of days..." type="text" name="nod" class="mx-auto mt-5 pl-8 p-2 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </a>
-            </div>
-            <div class="flex my-2">
-              <button
-                  class="text-white text-center px-5 mx-auto my-5 bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
-              >
-                  Reserve Room
-              </button>
-          </div>
-        </form>
+            <br />
+            <br />
+            <br />
         </div>
     </div>
+    <div
+        class="px-8 pb-8 pt-4 shadow-md border-2 border-gray-50 rounded-md my-10"
+        >
+        <h1 class="md:text-2xl font-bold text-primary mb-2 text-xl">
+            Choose your room
+        </h1>
+
+        <!-- group of cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-4 my-4">
+            
+            {% with str='123' %}
+            {% for i in str %}
+            <!-- single card -->
+            <div
+                class="max-w-xs xl:max-w-xs mx-auto shadow-md rounded-lg flex flex-col transition transform ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-150"
+                >
+                <img
+                    src="{% static 'images/room.jpg' %}"
+                    class="h-56 w-full rounded-t-lg"
+                    alt=""
+                />
+                <div class="px-4 py-2">
+                    <div class="flex justify-between">
+                        <h3 class="text-primary text-xl font-semibold">
+                            Room with {{i}} Bed/s
+                        </h3>
+                        <div class="text-xl text-gray-800">$ {% widthratio hotel.price_per_24_h 1 i %} </div>
+                    </div>
+                    <div>
+                        <div class="flex">
+                            <div class="text-primary font-Poppins text-lg">
+                                Size :
+                            </div>
+                            <p>20 sq m</p>
+                        </div>
+                        <div class="flex">
+                            <div class="text-primary font-Poppins text-lg">
+                                Bed :
+                            </div>
+                            <p>{{i}} Double Bed/s</p>
+                        </div>
+                        <div class="flex">
+                            <div class="text-primary font-Poppins text-lg">
+                                Wifi :
+                            </div>
+                            <p>Free WiFi</p>
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <div class="flex my-2">
+                        <a href="/hotel/reserve/{{hotel.id}}/"
+                            class="text-white w-full bg-primary rounded-md hover:text-primary hover:bg-white border-2 border-primary"
+                        >
+                            Reserve
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endwith %}
+
+        </div>
+    </div>
+
 </div>
 
 {% endblock content %}

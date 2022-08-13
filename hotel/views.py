@@ -59,13 +59,12 @@ def hotelDetail(request, pk):
 
 @login_required(login_url='/account/login/')
 def roomReserve(request, pk):
-    if request.method == 'POST':
-        user = request.user
-        hotel = Hotel.objects.get(pk=pk)
+    user = request.user
+    hotel = Hotel.objects.get(pk=pk)
 
-        hotel.if_free = False
-        hotel.save()
+    hotel.if_free = False
+    hotel.save()
 
-        HotelReservation.objects.create(user=user, hotel=hotel, number_of_days=request.POST.get('nod'))
+    HotelReservation.objects.create(user=user, hotel=hotel)
 
-        return redirect(f'/hotel/detail/{pk}/')
+    return redirect(f'/hotel/detail/{pk}/')

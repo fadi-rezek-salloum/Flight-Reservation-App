@@ -285,7 +285,13 @@
 
   <!-- select your  -->
   <div class="container flex flex-col items-center py-6">
-    <h1 class="md:text-2xl font-bold text-primary 2 text-xl">Select Your Return Flight
+    <h1 class="md:text-2xl font-bold text-primary 2 text-xl">Select Your 
+        {% if returning %}
+            Two-Way
+        {% else %}
+            One-Way
+        {% endif %}
+        Flight
     </h1>
     <h1 class="md:text-2xl font-bold text-primary 2 text-xl">
       {% if from_loc %}
